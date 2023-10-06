@@ -1,0 +1,26 @@
+<div class="container mt-3">
+    <h4 class="text-center mb-3">Pipes in Angular</h4>
+    <p>{{defination | lowercase}}</p>
+    <p>{{definationPart2 |uppercase}}</p>
+
+    <button (click)="show=!show">Toogle Pipes</button>
+    <p *ngIf="show">{{todayDate|date:'fullDate'}} - <sub>Using pipes in Template File</sub></p>
+    <p *ngIf="!show">{{currDate}} - <sub>Using pipes in Ts File </sub></p>
+    <p>{{title}} -<sub> This is normal variable value</sub></p>
+    <p>{{title|slice :3:15|uppercase}}- <sub>splice() is used with the help of pipes & we can use mutiple pipes</sub></p>
+    <p>{{detail|titlecase}}</p>
+    <p>{{userData}}</p>
+    <p>{{userData|json}} - <sub>json pipe is used to show object on Html without stringfy the object </sub>></p>
+    <p>{{2.453920209|number:'2.3-4'}} - <sub>number take 3 Parameters 3rd is optional</sub><br>
+        <sub>1. => minIntegerDigits</sub><br>
+        <sub>2. => minFractionDigits</sub><br>
+        <sub>3. => maxFractionDigits</sub>
+    </p>
+   <p class="fs-4 fw-bold">Custome Pipes -</p>
+   <p *ngIf="show">{{2|custPipe:75}} - <sub>Using Custome pipe in Template File</sub></p>
+   <p *ngIf="!show">{{custMM}} - <sub>Using Custome pipe in Ts File</sub></p>
+   <br>
+   <label>Dollar Amount  - </label><input type="number" [(ngModel)]="ruppess" placeholder="$ Value" min="1"><br>
+   <label>Ruppess Amount- </label><input type="number" [(ngModel)]="dollar"placeholder="₹ Amount" min="1"><br>
+    <p>Total Value is - {{dollar|custPipe:ruppess}}</p>
+</div>

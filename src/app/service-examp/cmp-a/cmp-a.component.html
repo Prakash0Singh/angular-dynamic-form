@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-center">
+    <input type="number" placeholder="Enter random number" #inputNum>
+    <button (click)="numadd(inputNum.value)">Add</button>
+</div>
+<div class="">
+    <ul>
+        <li *ngFor="let i of listData">{{i}}</li>
+    </ul>
+</div>

@@ -1,0 +1,6 @@
+.manmade-sublist li a{
+    color: rgb(60, 51, 51);
+}
+.manmade-sublist li a:hover{
+    color: black;
+}

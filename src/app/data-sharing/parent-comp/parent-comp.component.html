@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <div class="row ">
+        <div class="col-6 mx-auto card">
+            <div class="card-header">
+                Parent Component
+            </div>
+            <div class="card-body">
+                <label for="passingdata" class="form-label">Passing Data: </label>
+                <input type="text" id="passingdata" placeholder="something to pass" class="ms-2 form-controls" [(ngModel)]="passingData">
+                <button class="btn btn-sm btn-dark ms-2" (click)="transferData()">Pass</button>
+                <p>Getting Data From Childern Component : {{value}}</p>
+                <p>Getting Data Through View-Child : <span class="fw-bold">{{valueFromViewChild}}</span></p>
+            </div>
+            <a class="btn btn-sm btn-danger" routerLink="child-comp">Child Compoent</a>
+            <router-outlet></router-outlet>
+            <!-- <app-children-comp [parentData]="parentData" (sendData)="sendData($event)"></app-children-comp> -->
+            <app-sibling-comp  [parentData]="parentData" ></app-sibling-comp>
+        </div>
+    </div>
+</div>
+

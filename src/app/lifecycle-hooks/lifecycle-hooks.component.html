@@ -1,0 +1,22 @@
+<div class="container main-box">
+<h4 class="text-center pt-4">Life Cycle Hooks in Angular</h4>
+<div class="container d-flex justify-content-center mt-5 mb-4">
+    <input type="text" placeholder="Enter Something here..." #ValueGetting [(ngModel)]="parentVar">
+    <button (click)="changeValue(ValueGetting)" class="ms-3" >Submit</button>
+    <br>
+    <button class="ms-3" (click)="'Hello'">DoCheck</button>
+</div>
+<button class="ms-5 mb-3"(click)="showChild=!showChild">Show Child</button>
+<app-child-comp *ngIf="showChild" [submitedValue]="value">
+    <!-- Content Projection on Child Class -->
+    <p class="fs-4 mt-3 ms-2" #contentParent>DATA FROM PARENT-{{value}}</p>
+
+    <!-- <app-sib-comp></app-sib-comp> -->
+</app-child-comp>
+
+<p class="ms-5 mt-2">[PARENT] DoCheck -{{cal}} times</p>
+
+<app-sib-comp></app-sib-comp>
+<br>
+<!-- <app-temp-comp></app-temp-comp> -->
+</div>

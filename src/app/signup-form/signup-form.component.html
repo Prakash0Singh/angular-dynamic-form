@@ -1,0 +1,28 @@
+<div class="mt-5">
+    <div class="m-3 d-flex justify-content-center">
+        <div class="card px-5">
+            <p class="text-center m-3 fs-1">Sign-up</p>
+    <form [formGroup]="moreDeati"  >
+        <label for="firname" class="m-2">Enter First Name :</label>
+        <input type="text" id="firname" placeholder="Enter first Name..." formControlName="firstName">
+        <sup class="text-danger ms-2" *ngIf=" moreDeati.get('firstName')?.invalid && moreDeati.get('firstName')?.touched">*required</sup>
+        <sup  class="text-danger ms-2 " *ngIf="showMsg">*please fill firstName</sup>
+        <br>
+        <label for="lstname" class="m-2">Enter Last Name :</label>
+        <input type="text" id="lstname" placeholder="Enter last Name..." formControlName="lastName">
+        <!-- <span class="text-danger ms-2" *ngIf=" moreDeati.get('lastName')?.invalid && moreDeati.get('lastName')?.touched"> *required field</span> -->
+        <br> 
+        <label for="email" class="m-2" >Enter Your Email :</label>
+        <input type="email" id="email" placeholder="Enter Email ..." formControlName="email">
+        <sup class="text-danger ms-2" *ngIf=" moreDeati.get('email')?.invalid && moreDeati.get('email')?.touched"> *Email is required</sup>
+        <br>
+        <label for="crtpss" class="m-2" >Create Password :</label>
+        <input type="password" id="crtpss" placeholder="Create Password ..." formControlName="crPass">
+        <sup class="text-danger ms-2" *ngIf=" moreDeati.get('crPass')?.invalid && moreDeati.get('crPass')?.touched"> *Create Password is required</sup>
+        <br>
+        <button type="submit" (click)="retFormDeatil()" class="btn btn-sm btn-primary mb-4 mt-2 mx-2" >Submit</button>
+        <button type="button" class="btn btn-sm btn-outline-dark mb-4 mt-2 mx-2" (click)="setValueData()">setValue</button>
+    </form>
+</div>
+</div>
+</div>

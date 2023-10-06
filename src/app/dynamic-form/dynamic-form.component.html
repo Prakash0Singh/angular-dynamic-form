@@ -1,0 +1,10 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div appearance="fill" class="w-100" *ngFor="let i of formControls?.controls">
+        <div>{{i.label}}</div>
+      <input [type]="i.type"  [value]="i.value" [formControlName]="i.name">
+      <!-- <input matInput> -->
+      </div>
+      <button class="btn btn-sm btn-primary" [disabled]="!myForm.valid">Submit </button>
+      
+</form>
+<button class="btn btn-success btn-sm " (click)="patchData()">Patch Value</button>

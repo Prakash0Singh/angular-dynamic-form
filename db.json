@@ -1,0 +1,310 @@
+{
+  "users": [
+    {
+      "firstName": "Prakash",
+      "lastName": "Singh",
+      "age": 45,
+      "gender": "male",
+      "address": {
+        "streetaddress": "Ghar ka address (updated)",
+        "flatno": "122",
+        "zipcode": "302021",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "testing@gmail.com",
+      "createpassword": "111111",
+      "confirmpassword": "111111",
+      "phone": "4458988787",
+      "id": 10
+    },
+    {
+      "firstName": "Random",
+      "lastName": "user",
+      "age": 30,
+      "gender": "female",
+      "address": {
+        "streetaddress": "home Address",
+        "flatno": "2",
+        "zipcode": "302021",
+        "city": "Ajmer",
+        "state": "Rajasthan"
+      },
+      "email": "randomuser@gmail.com",
+      "createpassword": "ransomduser",
+      "confirmpassword": "rabdoeru",
+      "phone": "1234567890",
+      "id": 11
+    },
+    {
+      "firstName": "Prakash",
+      "lastName": "",
+      "age": 12,
+      "gender": "male",
+      "address": {
+        "streetaddress": "Ghar ka address",
+        "flatno": "12",
+        "zipcode": "302021",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "prakash@gmail.com",
+      "createpassword": "111111",
+      "confirmpassword": "111111",
+      "phone": "7897897890",
+      "id": 12
+    },
+    {
+      "firstName": "Aam",
+      "lastName": "Singh",
+      "age": "27",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Ghar ka address",
+        "flatno": "A-29",
+        "zipcode": "302021",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "testing@gmail.com",
+      "createpassword": "111111",
+      "confirmpassword": "111111",
+      "phone": "9875678928",
+      "id": 13
+    },
+    {
+      "firstName": "B",
+      "lastName": "Name",
+      "age": "99",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Ghar ka address",
+        "flatno": "A-29",
+        "zipcode": "302021",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "testing@gmail.com",
+      "createpassword": "111111",
+      "confirmpassword": "111111",
+      "phone": "0876543210",
+      "id": 14
+    },
+    {
+      "firstName": "D",
+      "lastName": "Name",
+      "age": "66",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Ghar ka address",
+        "flatno": "12",
+        "zipcode": "302021",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "testing@gmail.com",
+      "createpassword": "111111",
+      "confirmpassword": "111111",
+      "phone": "0987654321",
+      "id": 15
+    },
+    {
+      "firstName": "C",
+      "lastName": "Name",
+      "age": "27",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Ghar ka address",
+        "flatno": "122",
+        "zipcode": "302021",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "testing@gmail.com",
+      "createpassword": "111111",
+      "confirmpassword": "111111",
+      "phone": "0987654321",
+      "id": 16
+    },
+    {
+      "firstName": "Aman",
+      "lastName": "Singh",
+      "age": "45",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Aman Home",
+        "flatno": "3-YP",
+        "zipcode": "302020",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "aman@gmail.com",
+      "createpassword": "amanPassword",
+      "confirmpassword": "amanPassword",
+      "phone": "9876543210",
+      "id": 17
+    },
+    {
+      "firstName": "Demo",
+      "lastName": "User",
+      "age": "27",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Demo User Home Address",
+        "flatno": "P-19",
+        "zipcode": "479856",
+        "city": "Demo",
+        "state": "Rajasthan"
+      },
+      "email": "demouser@gmail.com",
+      "createpassword": "demouser",
+      "confirmpassword": "demouser",
+      "phone": "8946372901",
+      "id": 18
+    },
+    {
+      "firstName": "BBA",
+      "lastName": "Name",
+      "age": "45",
+      "gender": "female",
+      "address": {
+        "streetaddress": "BBA Course",
+        "flatno": "B-87",
+        "zipcode": "202020",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "bba@gmail.com",
+      "createpassword": "bba@123",
+      "confirmpassword": "bba@123",
+      "phone": "7845998789",
+      "id": 21
+    },
+    {
+      "firstName": "Aman",
+      "lastName": "Rajput",
+      "age": "16",
+      "gender": "male",
+      "address": {
+        "streetaddress": "Aman Rajput Home",
+        "flatno": "E-10",
+        "zipcode": "303030",
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      "email": "amanrajput@gmail.com",
+      "createpassword": "amanrajput",
+      "confirmpassword": "amanrajput",
+      "phone": "9639638520",
+      "id": 24
+    }
+  ],
+  "sales": [
+    {
+      "name": "New User",
+      "itemName": "Laptop",
+      "year": "2019",
+      "colorCode": "#97ca49",
+      "purchaseCost": "15000",
+      "saleCost": "10000",
+      "id": 11
+    },
+    {
+      "name": "Fake User",
+      "itemName": "Car",
+      "year": "2019",
+      "colorCode": "#006af5",
+      "purchaseCost": "10000",
+      "saleCost": "13000",
+      "id": 12
+    },
+    {
+      "name": "Car User",
+      "itemName": "Big Car",
+      "year": "2017",
+      "colorCode": "#acff75",
+      "purchaseCost": "10000",
+      "saleCost": "13000",
+      "id": 13
+    },
+    {
+      "name": "qwertyui",
+      "itemName": "qwertyu",
+      "year": "2019",
+      "colorCode": "#844d4d",
+      "purchaseCost": "17000",
+      "saleCost": "16000",
+      "id": 14
+    },
+    {
+      "name": "abc",
+      "itemName": "Laptop",
+      "year": "2017",
+      "colorCode": "",
+      "purchaseCost": "1000",
+      "saleCost": "10000",
+      "id": 15
+    },
+    {
+      "name": "Prakash",
+      "itemName": "Desktop PC",
+      "year": "2010",
+      "colorCode": "#4d9352",
+      "purchaseCost": "4000",
+      "saleCost": "6000",
+      "id": 16
+    },
+    {
+      "name": "kjlkj",
+      "itemName": "abc",
+      "year": "2020",
+      "colorCode": "#fa0000",
+      "purchaseCost": "7500",
+      "saleCost": "10000",
+      "id": 17
+    }
+  ],
+  "demouser": [
+    {
+      "name": "superman",
+      "age": "25",
+      "number": "9867854564",
+      "id": 11
+    },
+    {
+      "name": "task",
+      "age": "12",
+      "number": "8392128301",
+      "id": 12
+    },
+    {
+      "name": "Prakash",
+      "age": "17",
+      "number": "9872345678",
+      "id": 13
+    },
+    {
+      "name": "RandomUser",
+      "age": "28",
+      "number": "8947392910",
+      "id": 14
+    },
+    {
+      "name": "Demo User",
+      "age": "28",
+      "number": "9867854564",
+      "id": 15
+    }
+  ],
+  "data":[
+    {
+      "id":0,
+      "firstName":"Demo",
+      "lastName":"User",
+      "comments":"some random comments",
+      "agreeTerms":true,
+      "size":60,
+      "lightDark":true
+    }
+  ]
+}

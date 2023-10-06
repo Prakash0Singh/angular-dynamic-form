@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <p class="text-center fs-1">Cars List</p>
+        </div>
+        <ul>
+            <li  class="d-inline">
+                <img class="border border-dark m-3" [src]="carDetailList[0].img" [alt]="carDetailList[0].id" (click)="CarClick1($event)"  width="250px" height="250px">
+            </li>
+            <li  class="d-inline">
+                <a [routerLink]="['/carB-detail',carDetailList[2].id]">
+                <img class="border border-dark m-3" [src]="carDetailList[2].img" [alt]="carDetailList[2].id" width="250px" height="250px">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

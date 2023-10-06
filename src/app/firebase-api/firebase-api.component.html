@@ -1,0 +1,42 @@
+<h3 class="text-center">Firebase REST API's</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <p class="text-center">User Login </p>
+            <div class="d-flex  justify-content-center">
+                <form [formGroup]="firebaseAuth" (ngSubmit)="userlogin()">
+                    <div class="my-2">
+                        <input type="text" pInputText id="login" formControlName="userid" placeholder="user-id">
+                    </div>
+                    <div class="my-2">
+                        <p-password formControlName="password" [toggleMask]="true" placeholder="password"></p-password>
+                    </div>
+                    <div class="my-2">
+                        <input type="submit" pButton pRipple label="Submit" class="p-button-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="col-12">
+
+            <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>About</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.about }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="col-12 my-2">
+
+        </div>
+    </div>
+</div>

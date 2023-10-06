@@ -1,0 +1,100 @@
+<!-- To Do List using Reactive Form -->
+<div class="m-5 ">
+    <p class="fs-2 text-center text-primary">To Do list - Reactive forms</p>
+    <div class="m-5">
+        <form [formGroup]="todolist" (ngSubmit)="todolistData()">
+             <div class="row mb-3">
+    <label for="inputEmail3" class="col-sm-2 col-form-label fw-bold fs-4">Title :</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Enter Title Here ....." formControlName="title">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputPassword3" class="col-sm-2 col-form-label fw-bold fs-4">Details : </label>
+    <div class="col-sm-10">
+    <textarea name="inputPassword3"  id="inputPassword3" cols="30" rows="4" class="form-control" placeholder="Enter Detail note here ....." formControlName="detail"></textarea>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success float-end mb-5 " [disabled]="!todolist.valid" *ngIf="addBtn">ADD</button>
+  <button type="button" class="btn btn-success float-end mb-5 me-3" (click)="updateToDoList($event)" [value]="updateIndex" *ngIf="updateBtn">UPDATE</button>
+        </form>
+    </div>
+</div>
+<div class="d-flex justify-content-center m-5" *ngIf="showTodoRecords">
+    <div class="card">
+        <div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+        <tbody class="table-group-divider">
+
+        <tr *ngFor="let i of todoRecords;let j=index">
+            <td>{{i.title}}</td>
+            <td>{{i.detail}}</td>
+            <td>
+                <button class="btn btn-sm btn-danger  me-3"(click)="removeRecord(j)"><i class="bi bi-trash3-fill"></i></button>
+                <button class=" btn btn-sm btn-warning" (click)="editRecord(j)"><i class="bi bi-pencil-square"></i></button>
+            </td>
+        </tr>
+    </tbody>
+
+    </table>
+</div>
+</div>
+</div>
+<!-- To Do List using Template Driven Form -->
+<div class="m-5 ">
+    <p class="fs-2 text-center text-primary">To Do list - Template Driven form</p>
+    <div class="m-5">
+        <form #todoTemp="ngForm" (ngSubmit)="tempToDO()">
+             <div class="row mb-3">
+    <label for="inputEmail3" class="col-sm-2 col-form-label fw-bold fs-4">Title :</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Enter Title Here ....." name="title" [value]="templateTitleValue"  [(ngModel)]="templatModel.title">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputPassword3" class="col-sm-2 col-form-label fw-bold fs-4">Details : </label>
+    <div class="col-sm-10">
+    <textarea name="inputPassword3"  id="inputPassword3" cols="30" rows="4" class="form-control" placeholder="Enter Detail note here ....." name="detail"[value]="templateDetailValue" [(ngModel)]="templatModel.detail"></textarea>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success float-end mb-5 " *ngIf="tempAddBtn">ADD</button>
+  <button type="button" class="btn btn-success float-end mb-5 me-3" (click)="tempUpdateTodo($event)" [value]="tempUpdateIndex" *ngIf="tempUpdateBtn">UPDATE</button>
+        </form>
+    </div>
+</div>
+<!-- To show the data  -->
+<div class="d-flex justify-content-center m-5" *ngIf="tempShowRecords">
+    <div class="card">
+        <div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+        <tbody class="table-group-divider">
+
+        <tr *ngFor="let i of tempTodoArray;let j=index">
+            <td>{{i.title}}</td>
+            <td>{{i.detail}}</td>
+            <td>
+                <button class="btn btn-sm btn-danger  me-3"(click)="tempRemoveRecord(j)"><i class="bi bi-trash3-fill"></i></button>
+                <button class=" btn btn-sm btn-warning" (click)="tempEditRecord(j)"><i class="bi bi-pencil-square"></i></button>
+            </td>
+        </tr>
+    </tbody>
+
+    </table>
+</div>
+</div>
+</div>

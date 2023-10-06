@@ -1,0 +1,9 @@
+[*] How to add Bootstrap in Angular---
+    1.using Angular CLI commande - ngx-bootstrap | ng-bootstrap
+    2.using npm package - npm install bootstrap
+        - then we have to add it to our global (style.css)CSS 
+            @import "~../node_modules/bootstrap/dist/css/bootstrap.min.css"
+                or
+            angular.json -> architect -> build -> styles
+            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+    3.adding link to our main file(index.html)

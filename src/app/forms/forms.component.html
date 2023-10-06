@@ -1,0 +1,109 @@
+<!-- Reactive Forms in Angular  -->
+<div class="mt-5">
+    <h3 class="text-center text-danger">Reactive Form in Angualr</h3>
+    <p class="text-center m-3">Fill Form Carefree</p>
+    <div class="m-3 d-flex justify-content-center">
+        <div class="card p-5 ">
+            <form [formGroup]="moreDeati">
+                <label for="firname" class="m-2">Enter First Name :</label>
+                <input type="text" id="firname" placeholder="Enter first Name..." formControlName="firstName">
+                <sup class="text-danger ms-2"
+                    *ngIf=" moreDeati.get('firstName')?.invalid && moreDeati.get('firstName')?.touched"> *required First
+                    Name</sup>
+                <!-- <ng-template [ngIf]=" moreDeati.get('firstName')?.invalid && moreDeati.get('firstName')?.touched">
+            <sup style="font-size: 12px; color: red;" *ngIf="confirmPassword.errors['required']">
+                *required confirm password
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="confirmPassword.errors['pattern']">
+                *0-9 & special symbols not allowed
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="confirmPassword.errors['minlength']">
+                *required min. 6 letters
+            </sup>
+        </ng-template> -->
+                <br>
+                <label for="lstname" class="m-2">Enter Last Name :</label>
+                <input type="text" id="lstname" placeholder="Enter last Name..." formControlName="lastName">
+                <!-- <span class="text-danger ms-2" *ngIf=" moreDeati.get('lastName')?.invalid && moreDeati.get('lastName')?.touched"> *required field</span> -->
+                <br>
+                <label for="age" class="m-2">Enter Your Age :</label>
+                <input type="number" id="age" placeholder="Enter Age ..." formControlName="age">
+                <sup class="text-danger ms-2" *ngIf=" moreDeati.get('age')?.invalid && moreDeati.get('age')?.touched">
+                    *Age is required</sup>
+                <br>
+                <label for="city" class="m-2 me-4">Select City :</label>
+                <select name="cityNames" id="city" formControlName="city">
+                    <option value="" disabled>Select City</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Delhi">Delhi</option>
+                </select>
+                <sup class="text-danger ms-2" *ngIf=" moreDeati.get('city')?.invalid && moreDeati.get('city')?.touched">
+                    *City is required</sup>
+                <br>
+                <label for="pincode" class="m-2">Enter Pincode :</label>
+                <input type="number" placeholder="Enter Pincode ...." formControlName="pincode">
+                <sup class="text-danger ms-2"
+                    *ngIf=" moreDeati.get('pincode')?.invalid && moreDeati.get('pincode')?.touched"> *Pinconde is
+                    required</sup>
+                <br>
+                <label for="email" class="m-2">Enter Your Email :</label>
+                <input type="email" id="email" placeholder="Enter Email ..." formControlName="email">
+                <sup class="text-danger ms-2"
+                    *ngIf=" moreDeati.get('email')?.invalid && moreDeati.get('email')?.touched"> *Email is
+                    required</sup>
+                <br>
+                <label for="crtpss" class="m-2">Create Password :</label>
+                <input type="password" id="crtpss" placeholder="Create Password ..." formControlName="crPass">
+                <sup class="text-danger ms-2"
+                    *ngIf=" moreDeati.get('crPass')?.invalid && moreDeati.get('crPass')?.touched"> *Create Password is
+                    required</sup>
+                <br>
+                <label for="conpass" class="m-2">Confirm Password :</label>
+                <input type="password" id="conpass" placeholder="Confirm Password ..." formControlName="conPass">
+                <sup class="text-danger ms-2"
+                    *ngIf=" moreDeati.get('conPass')?.invalid && moreDeati.get('conPass')?.touched"> *Confirm Password
+                    is required</sup>
+                <p class="text-danger m-0 ms-2" *ngIf="pMatch"> *password not matched</p>
+                <br>
+                <button type="button" (click)="reactiveFormUpdate($event.target)" class="btn btn-sm btn-primary m-2"
+                    [value]="update" *ngIf="updateButton" [disabled]="moreDeati.invalid">Update</button>
+                <button type="submit" (click)="retFormDeatil()" class="btn btn-sm btn-primary m-2"
+                    [disabled]="moreDeati.invalid" *ngIf="!updateButton">Submit</button>
+                <button type="button" class="btn btn-sm btn-outline-dark" (click)="setValueData()">setValue</button>
+                <button type="button" class=" mx-3 btn btn-sm btn-danger" (click)="resetFormValue()">RESET</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="m-5 d-flex justify-content-center card" *ngIf="showRec">
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>Pincode</th>
+            <th>Email</th>
+            <th>Create Pass.</th>
+            <th>Confirm Pass.</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr *ngFor="let i of retUserRecord;let j=index">
+            <td>{{i.firstName}}</td>
+            <td>{{i.lastName}}</td>
+            <td>{{i.age}}</td>
+            <td>{{i.city}}</td>
+            <td>{{i.pincode}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.crPass}}</td>
+            <td>{{i.conPass}}</td>
+            <td>
+                <button class=" btn btn-sm btn-warning me-3" (click)="reactiveFormEdit(j)"><i
+                        class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-sm btn-danger" (click)="reactiveFormDelete(j)"><i
+                        class="bi bi-trash3-fill"></i></button>
+            </td>
+        </tr>
+    </table>
+</div>

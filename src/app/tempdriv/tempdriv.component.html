@@ -1,0 +1,116 @@
+<!-- Template Driven Forms -->
+<div class="mt-5">
+    <h3 class="text-center text-danger">Template-Driven Forms in Angualr</h3>
+    <div class="m-5 d-flex justify-content-center">
+        <!-- (submit)="callSubmit(tempForm)" -->
+    <div class="card p-5">
+    <form #tempFormData="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <label for="userfirst" class="me-3" >First Name : </label>
+        <input type="text" name="firstname" placeholder="First Name" id="userfirst" required minlength="3"  pattern="^[a-zA-Z]+$"   #firstName="ngModel" ngModel >
+        <ng-template [ngIf]="firstName.touched && firstName.invalid && firstName.errors">
+            <sup style="font-size: 12px; color: red;" *ngIf="firstName.errors['required']">
+                *please fill first name
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="firstName.errors['pattern']">
+                *0-9 & special symbols not allowed
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="firstName.errors['minlength']">
+                *required min. 3 letters
+            </sup>
+        </ng-template>
+        <label for="userlast" class=" ms-3 mt-3 me-3" >Last Name : </label>
+        <input type="text" name="lastname" placeholder="Last Name" id="userlast" required minlength="3"  pattern="^[a-zA-Z]+$"   #lastName="ngModel" ngModel>
+        <ng-template [ngIf]="lastName.touched && lastName.invalid && lastName.errors">
+            <sup style="font-size: 12px; color: red;" *ngIf="lastName.errors['required']">
+                *please fill first name
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="lastName.errors['pattern']">
+                *0-9 & special symbols not allowed
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="lastName.errors['minlength']">
+                *required min. 3 letters
+            </sup>
+        </ng-template>
+        <br>
+        <label for="userCity" class=" ms-1 mt-3 me-3">Select City : </label>
+        <select name="city" class="me-5" id="userCity" #cityName="ngModel"required ngModel> 
+            <option value="" disabled>Select City</option>
+            <option *ngFor="let i of cityOption" value="{{i}}">{{i}}</option>
+        </select>
+        <label for="gender" class=" mt-3 me-3 "> Geneder : </label>
+        <input type="radio" value="male" name="gender"  required #gender="ngModel" ngModel> Male
+        <input type="radio" value="female" name="gender"  required #gender="ngModel" ngModel> Female
+        <br>
+        <label for="userEmail" class="mt-3 me-3 ">Enter your Email : </label>
+        <input type="email" name="email" placeholder="Enter Email" id="userEmail" required email #email="ngModel" ngModel>
+        <sup style="font-size: 12px; color: red;" *ngIf="email.touched && email.invalid">
+            *email required
+        </sup><br>
+        <label for="createPassword" class=" mt-3 me-3" >Create Password : </label>
+        <input type="password" name="createPassword" placeholder="Create Password" id="createPassword" required minlength="6"  #createPassword="ngModel" ngModel>
+        <ng-template [ngIf]="createPassword.touched && createPassword.invalid && createPassword.errors">
+            <sup style="font-size: 12px; color: red;" *ngIf="createPassword.errors['required']">
+                *create password
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="createPassword.errors['pattern']">
+                *0-9 & special symbols not allowed
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="createPassword.errors['minlength']">
+                *required min. 6 letters
+            </sup>
+        </ng-template>
+        <br>
+        <label for="confirmPassword" class=" mt-3 me-2" >Confirm Password :</label>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirmPassword" required minlength="6"  #confirmPassword="ngModel" ngModel>
+        <ng-template [ngIf]="confirmPassword.touched && confirmPassword.invalid && confirmPassword.errors">
+            <sup style="font-size: 12px; color: red;" *ngIf="confirmPassword.errors['required']">
+                *required confirm password
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="confirmPassword.errors['pattern']">
+                *0-9 & special symbols not allowed
+            </sup>
+            <sup style="font-size: 12px; color: red;" *ngIf="confirmPassword.errors['minlength']">
+                *required min. 6 letters
+            </sup>
+        </ng-template>
+       <br>
+       <ng-template [ngIf]="confirmPassword.touched && createPassword.value !== confirmPassword.value">
+        <sup style="font-size: 12px; color: red;">
+        *created password and confirm password doesn't match
+        </sup>
+    </ng-template>
+<button type="button" (click)="templateFormUpdate($event.target)" class="btn btn-sm btn-primary m-2 float-end"  [value]="templateUpdate" *ngIf="templateupdateButton" [disabled]="tempFormData.invalid || createPassword.value !== confirmPassword.value">Update</button>
+        <button type="submit" [disabled]="tempFormData.invalid || createPassword.value !== confirmPassword.value" class="mt-3 btn btn-sm btn-primary float-end"  *ngIf="!templateupdateButton" >Submit</button><br>
+    </form>
+</div>
+</div>
+<div class="m-5 d-flex justify-content-center card" *ngIf="showRecords">
+        <table>
+            <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Cre. Password</th>
+            <th>Con. Password</th>
+            <th>Actions</th>
+        </tr>
+        
+        <tr *ngFor="let i of userRecords;let j =index">
+        <ng-template></ng-template>
+            <td>{{i.firstname}}</td>
+            <td>{{i.lastname}}</td>
+            <td>{{i.city}}</td>
+            <td>{{i.gender}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.createPassword}}</td>
+            <td>{{i.confirmPassword}}</td>
+            <td>
+                <button class=" btn btn-sm btn-warning me-3" (click)="editFormDetail(j)"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-sm btn-danger  me-3" (click)="deleteFormDetail(j)"><i class="bi bi-trash3-fill"></i></button>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>

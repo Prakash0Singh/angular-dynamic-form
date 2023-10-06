@@ -1,0 +1,493 @@
+<div class="container mt-3">
+  <button mat-raised-button color="warn" class="float-end" data-bs-toggle="modal" data-bs-target="#MoreDetail" 
+    (click)="show()">
+    Add New
+  </button>
+</div>
+<br />
+<!-- Showing API data in the form of Table -->
+<!-- bi bi-sort-alpha-up-alt -->
+
+<div class="container mt-5">
+  <div class="filterUserInput position-relative  ">
+    <input type="text"  placeholder="search username" [(ngModel)]="filterUserName"
+      class="form-control"/>
+    <button class="btn position-absolute end-0" (click)="filterUserName = ''" *ngIf="filterUserName != ''">
+      <i class="bi bi-x-lg"></i>
+        </button>
+  </div>
+  <br>
+  <h4 class="text-center" >User Data</h4>
+  <div class="container mt-2" *ngIf="showspinner">
+    <div class="d-flex justify-content-center flex-row mt-5 mb-4">
+      <div class="col-2 mx-auto spinner-border text-primary" style="width: 6rem; height: 6rem;"  role="status"  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<p class="text-muted text-center">Please Wait Data is Loading.....</p>
+  </div>
+
+  <div class="container mt-2" *ngIf="allUser.length > 0">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            Name
+            <button *ngIf="!showZAButton" class="btn btn-sm btn-light" (click)="sorttingTabel('az')">
+              <i class="bi bi-sort-alpha-up"></i></button><button *ngIf="showZAButton" class="btn btn-sm btn-light"
+              (click)="sorttingTabel('za')">
+              <i class="bi bi-sort-alpha-down-alt"></i>
+            </button>
+          </th>
+          <th scope="col">Age</th>
+          <th scope="col">Mobile No.</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of allUser | filter : filterUserName | paginate :{itemsPerPage:tabelSize,currentPage:page,totalItems:count}; let idx=index">
+          <td (click)="marqueeCall(i.firstName,i.lastName)">{{ i.firstName }} {{i.lastName}}</td>
+          <td>{{ i.age }}</td>
+          <td>{{ i.phone }}</td>
+          <td>{{ i.email }}</td>
+          <td>
+            {{ i.address.flatno }},{{ i.address.streetaddress }},<span class="fw-bold ms-1">{{ i.address.city }}</span>
+          </td>
+          <td>
+            <button mat-icon-button color="primary" class="me-2" data-bs-toggle="modal" data-bs-target="#MoreDetail"
+              (click)="editData(i)">	<mat-icon>mode_edit_outline</mat-icon></button>
+            <button mat-icon-button  color="warn"  data-bs-toggle="modal" data-bs-target="#deleteWarning"
+              (click)="deleteData(i.id, i.firstName+' '+i.lastName)"><mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- For Pagination -->
+
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <div>
+      <label for="">Items per page </label>
+    </div>
+      <div>
+    <select name="" id="itemList" class="form-select form-select-sm ms-1 " (change)="onTabelSizeChange($event)">
+      <option *ngFor="let size of tabelSizes">
+        {{size}}
+      </option>
+    </select>
+  </div>
+  </div>
+  <pagination-controls
+  previousLabel=""
+  nextLabel=""
+  [autoHide]='true'
+  [responsive]='true'
+  (pageChange)="onTabelDataChange($event)"
+  >
+  </pagination-controls>
+  </div>
+ 
+
+    <!-- For Pagination -->
+  </div>
+</div>
+
+<!-- Signup && Edit Model -->
+<!-- <div class="modal fade" id="signUpForm" tabindex="-1" aria-labelledby="signUpForm" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">{{Heading}}</h1>
+          <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close" (click)=" this.moreDeati.reset()"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="container">
+                <form class="row g-3" [formGroup]="moreDeati">
+                    <div class="col-12">
+                        <label for="firname" class="form-label">Name :</label>
+                        <input type="text" class="form-control" id="firname" placeholder="Enter Full Name..." formControlName="name">
+                        <sup class="text-danger ms-2" *ngIf=" moreDeati.get('name')?.invalid && moreDeati.get('name')?.touched"> *Name is required</sup>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label" >Email :</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email ..." formControlName="email">
+                        <sup class="text-danger ms-2" *ngIf=" moreDeati.get('email')?.invalid && moreDeati.get('email')?.touched"> *Email is required</sup>
+                    </div>
+                    <div class="col-md-5">
+                    <label for="crtpss" class="form-label" >Create Password :</label>
+                    <input [type]="showPass ? 'text':'password'" class="form-control" id="crtpss" placeholder="Create Password ..." formControlName="password">
+                    <sup class="text-danger ms-2" *ngIf=" moreDeati.get('password')?.invalid && moreDeati.get('password')?.touched"> *Create Password is required</sup>
+                    </div>
+                    <div class="col-md-1 mt-md-5">
+                      <button class="d-inline  btn btn-outlinedark" (click)="showPass=!showPass"><i [class]="showPass ? 'bi bi-eye-slash-fill':'bi bi-eye-fill'"></i></button>
+                    </div>
+                    <div class="col-md-8">
+                    <label for="age" class="form-label" >Mobile Number :</label>
+                    <input type="text" class="form-control" id="mobile" placeholder="Enter Moble No ..." formControlName="phone">
+                    <sup class="text-danger ms-2" *ngIf=" moreDeati.get('phone')?.invalid && moreDeati.get('phone')?.touched"> *Mobile Number is required</sup>
+                    </div>
+                    <div class="col-md-4">
+                    <label for="age" class="form-label">Age :</label>
+                    <input type="number" class="form-control" id="age" placeholder="Enter Age ..." formControlName="age">
+                    <sup class="text-danger ms-2" *ngIf=" moreDeati.get('age')?.invalid && moreDeati.get('age')?.touched"> *Age is required</sup>
+                    </div>
+                    <div class="col-12">
+                    <button type="submit" (click)="updatUserData()" class="btn btn-sm btn-primary m-2 float-end" [disabled]="moreDeati.invalid" *ngIf="showUpdate==true" data-bs-dismiss="modal">Update Account</button>
+                    <button type="submit" *ngIf="showSignUp==true" (click)="retFormDeatil()" class="btn btn-sm btn-primary m-2 float-end" [disabled]="moreDeati.invalid" data-bs-dismiss="modal">Create Account</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!-- Delete Warning -->
+
+<div class="modal fade" id="deleteWarning" tabindex="-1" aria-labelledby="deleteWarning" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="d-flex justify-content-center pt-5 pb-0">
+          <p>
+            Are you sure,you want to delete
+            <span class="fw-bold"> {{ deletingUserName }}</span> record ?
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer" style="border-top: none">
+        <button type="button" mat-raised-button data-bs-dismiss="modal" (click)="confirmDelete()">
+          Yes
+        </button>
+        <button type="button" mat-raised-button color="primary"  data-bs-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add New Data Modal -->
+<div class="modal fade" id="MoreDetail" tabindex="-1" aria-labelledby="MoreDetail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 500px">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">User Detail's</h1>
+        <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"
+          (click)="this.userDetailsMore.reset()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <form class="row g-3" [formGroup]="userDetailsMore">
+            <div class="col-6">
+              <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="true">
+                <mat-label>First Name :</mat-label>
+              <input type="text" matInput class="form-control" id="name" aria-describedby="name" formControlName="firstName">
+              <mat-error class="text-danger ms-2" *ngIf="
+              userDetailsMore.get('firstName')?.invalid &&
+              userDetailsMore.get('firstName')?.touched
+              ">
+              * First Name is required</mat-error>
+            </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="fill" class="w-100">
+              <mat-label for="userlastName" class="form-label">Last Name :</mat-label>
+              <input type="text" matInput class="form-control" id="userlastName" placeholder="Last Name..."
+                formControlName="lastName" />
+              <mat-error class="text-danger ms-2" *ngIf="
+                  userDetailsMore.get('lastName')?.invalid &&
+                  userDetailsMore.get('lastName')?.touched
+                ">
+                *Last Name is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="true">
+              <mat-label for="userage" class="form-label">Age :</mat-label>
+              <input type="text" matInput class="form-control" id="userage" placeholder="Enter Age ..." formControlName="age" />
+              <!-- <div *ngIf="
+                  userDetailsMore.get('age')?.invalid &&
+                  userDetailsMore.get('age')?.errors &&
+                  (userDetailsMore.get('age')?.dirty ||
+                    userDetailsMore.get('age')?.touched)
+                "> -->
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('age')?.hasError('required')">
+                  *Age is required<br /></mat-error>
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('age')?.hasError('maxlength')">
+                  *Maximum 2 Digits<br /></mat-error>
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('age')?.hasError('pattern')">
+                  *Alphabets not allowed</mat-error>
+              <!-- </div> -->
+            </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-radio-group  formControlName="gender" aria-label="Select an option">
+                  <mat-radio-button name="gender"   value="male">Male</mat-radio-button>
+                  <mat-radio-button name="gender"   value="female">Female</mat-radio-button>
+                </mat-radio-group>
+              <!-- <label for="usergender" class="form-label">Gender :</label><br />
+              <div class="ms-3 d-inline">
+                <input type="radio" class="form-check-input" id="male" name="gender" value="male"
+                  formControlName="gender" /><label for="male" class="form-check-label ms-2">Male</label>
+              </div>
+              <div class="ms-3 d-inline">
+                <input type="radio" class="form-check-input" id="female" name="gender" value="female"
+                  formControlName="gender" /><label for="female" class="form-check-label ms-2">Female</label>
+              </div> -->
+              <sup class="text-danger ms-2" *ngIf="
+                  userDetailsMore.get('gender')?.invalid &&
+                  userDetailsMore.get('gender')?.touched
+                ">
+                *Gender is required</sup>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field appearance="fill" class="w-100">
+
+              <mat-label for="userMobile" class="form-label">Mobile Number :</mat-label>
+              <input type="text" matInput class="form-control" id="userMobile" placeholder="Enter Moble No ..." pattern="[0-9]+"
+                formControlName="phone" />
+              <!-- <div *ngIf="
+                  userDetailsMore.get('phone')?.invalid &&
+                  userDetailsMore.get('phone')?.errors &&
+                  (userDetailsMore.get('phone')?.dirty ||
+                    userDetailsMore.get('phone')?.touched)
+                "> -->
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('phone')?.hasError('required')">
+                  *Mobile Number is required<br /></mat-error>
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('phone')?.hasError('maxlength')">
+                  *Maximum 10 Digits Allowed<br /></mat-error>
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('phone')?.hasError('pattern')">
+                  *Alphabetic is Not Allowed</mat-error>
+              <!-- </div> -->
+            </mat-form-field>
+
+            </div>
+            <div class="col-12">
+              <div class="row" formGroupName="address">
+                <div class="col-12">
+              <mat-form-field appearance="fill" class="w-100">
+
+                  <mat-label for="userStreet" class="form-label">Street Address :</mat-label>
+                  <input matInput type="text" class="form-control" id="userStreet" placeholder="Street Address"
+                    formControlName="streetaddress" />
+                    <mat-error class="text-danger ms-2" *ngIf="
+                    userDetailsMore.controls['address']
+                      .get('streetaddress')
+                      ?.hasError('required')
+                  ">
+                  *Street Address is required<br /></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+              <mat-form-field appearance="fill" class="w-100">
+                  <mat-label for="userFlat" class="form-label">Flat No. :</mat-label>
+                  <input matInput type="text" class="form-control" id="userFlat" placeholder="Flat Number"
+                    formControlName="flatno" />
+                  <mat-error class="text-danger ms-2" *ngIf="
+                      userDetailsMore.controls['address'].get('flatno')
+                        ?.invalid &&
+                      userDetailsMore.controls['address'].get('flatno')?.touched
+                    ">
+                    *Flat No. is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="fill" class="w-100">
+
+                  <mat-label for="userzipcode" class="form-label">ZIP Code :</mat-label>
+                  <input matInput type="text" class="form-control" id="userzipcode" placeholder="Zipcode"
+                    formControlName="zipcode" />
+                  <!-- <div *ngIf="
+                      userDetailsMore.controls['address'].get('zipcode')
+                        ?.invalid &&
+                      userDetailsMore.controls['address'].get('zipcode')
+                        ?.errors &&
+                      (userDetailsMore.controls['address'].get('zipcode')
+                        ?.dirty ||
+                        userDetailsMore.controls['address'].get('zipcode')
+                          ?.touched)
+                    "> -->
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('zipcode')
+                          ?.hasError('required')
+                      ">
+                      *Zipcode is required<br /></mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('zipcode')
+                          ?.hasError('minlength')
+                      ">
+                      *Minimum 6 Digits Required<br /></mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('zipcode')
+                          ?.hasError('maxlength')
+                      ">
+                      *Maximum 6 Digits Allowed</mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('zipcode')
+                          ?.hasError('pattern')
+                      ">
+                      *Alphabetic is Not Allowed</mat-error>
+                  <!-- </div> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="fill" class="w-100">
+
+                  <mat-label for="userCity" class="form-label">City :</mat-label>
+                  <input matInput type="text" class="form-control" id="userCity" placeholder="City"
+                    formControlName="city" />
+                  <!-- <div *ngIf="
+                      userDetailsMore.controls['address'].get('city')
+                        ?.invalid &&
+                      userDetailsMore.controls['address'].get('city')?.errors &&
+                      (userDetailsMore.controls['address'].get('city')?.dirty ||
+                        userDetailsMore.controls['address'].get('city')
+                          ?.touched)
+                    "> -->
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('city')
+                          ?.hasError('required')
+                      ">
+                      *City is required<br /></mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('city')
+                          ?.hasError('pattern')
+                      ">
+                      *Digits are not allowed</mat-error>
+                  <!-- </div> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="fill" class="w-100">
+                  <mat-label for="userstate" class="form-label">State :</mat-label>
+                  <input matInput type="text" class="form-control" id="userstate" placeholder="State"
+                    formControlName="state" />
+                  <!-- <div *ngIf="
+                      userDetailsMore.controls['address'].get('state')
+                        ?.invalid &&
+                      userDetailsMore.controls['address'].get('state')
+                        ?.errors &&
+                      (userDetailsMore.controls['address'].get('state')
+                        ?.dirty ||
+                        userDetailsMore.controls['address'].get('state')
+                          ?.touched)
+                    "> -->
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('state')
+                          ?.hasError('required')
+                      ">
+                      *State is required<br /></mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="
+                        userDetailsMore.controls['address']
+                          .get('state')
+                          ?.hasError('pattern')
+                      ">
+                      *Digits are not allowed</mat-error>
+                  <!-- </div> -->
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field appearance="fill" class="w-100">
+              <mat-label for="useremail" class="form-label">Email :</mat-label>
+              <input matInput type="email" class="form-control" id="useremail" placeholder="Enter Email ..."
+                formControlName="email" />
+              <!-- <div *ngIf="
+                  userDetailsMore.get('email')?.invalid &&
+                  userDetailsMore.get('email')?.errors &&
+                  (userDetailsMore.get('email')?.dirty ||
+                    userDetailsMore.get('email')?.touched)
+                "> -->
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('email')?.hasError('required')">
+                  *Email is required<br /></mat-error>
+                <mat-error class="text-danger ms-2" *ngIf="userDetailsMore.get('email')?.hasError('pattern')">
+                  *Please Enter Valid Email</mat-error>
+              <!-- </div> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field appearance="fill" class="w-100">
+              <mat-label for="usercrtpss" class="form-label">Create Password :</mat-label>
+              <input  matInput [type]="hide ? 'text' : 'password'" class="form-control" id="usercrtpss"
+                placeholder="Create Password ..." formControlName="createpassword" />
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type='button'>
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              <mat-error class="text-danger ms-2" *ngIf="
+                  userDetailsMore.get('createpassword')?.invalid &&
+                  userDetailsMore.get('createpassword')?.touched
+                ">
+                *Create Password is required</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-md-1 mt-md-5 me-1">
+              <button class="d-inline btn btn-outlinedark btn-sm" (click)="showPass = !showPass">
+                <i [class]="showPass ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i>
+              </button>
+            </div> -->
+
+            <div class="col-md-6">
+              <mat-form-field appearance="fill" class="w-100">
+              <mat-label for="userconpss" class="form-label">Confirm Password :</mat-label>
+              <input matInput [type]="conhide ? 'text' : 'password'" class="form-control" id="userconpss"
+                placeholder="Confirm Password ..." formControlName="confirmpassword" />
+                <button mat-icon-button matSuffix (click)="conhide = !conhide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type='button'>
+                  <mat-icon>{{conhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              <mat-error class="text-danger ms-2" *ngIf="
+                  userDetailsMore.get('confirmpassword')?.invalid &&
+                  userDetailsMore.get('confirmpassword')?.touched
+                ">
+                *Confirm Password is required</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-md-1 mt-md-5">
+              <button class="d-inline btn btn-outlinedark btn-sm" (click)="confirmPas = !confirmPas">
+                <i [class]="confirmPas ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i>
+              </button>
+            </div> -->
+            <div class="col-12">
+              <sup class="text-danger" *ngIf="
+                  !(
+                    userDetailsMore.get('createpassword')?.value ==
+                    userDetailsMore.get('confirmpassword')?.value
+                  ) &&
+                  userDetailsMore.get('createpassword')?.value != '' &&
+                  userDetailsMore.get('confirmpassword')?.value != ''
+                ">*PassWord & Confirm Password doesn't match</sup>
+              <button type="submit" (click)="updatUserData()" class="btn btn-sm btn-primary m-2 float-end"
+                [disabled]="userDetailsMore.invalid" *ngIf="showUpdate == true" data-bs-dismiss="modal">
+                Update Account
+              </button>
+              <button type="submit" (click)="setFormDeatil()" class="btn btn-sm btn-primary m-2 float-end" [disabled]="
+                  userDetailsMore.invalid ||
+                  !(
+                    userDetailsMore.get('createpassword')?.value ==
+                    userDetailsMore.get('confirmpassword')?.value
+                  )
+                " *ngIf="showSignUp == true" data-bs-dismiss="modal">
+                Create Account
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<marquee  *ngIf="marqueeFullName!=''" direction="right" [ngStyle]="randomColor">Hello, {{marqueeFullName}}</marquee>

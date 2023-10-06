@@ -1,0 +1,14 @@
+<div class="container border border-danger child-box">
+    <h6 class="mt-4">Child Component </h6>
+<p>Input Value is :<strong> {{submitedValue}}</strong></p>
+<input type="text" class="mb-3" [(ngModel)]="childValue">
+<p *ngIf="preValue!=undefined" class="fw-bold">Previous Value is - {{preValue}}</p>
+<p *ngIf="curValue!=undefined" class="fw-bold">Current Value is - {{curValue}}</p>
+<div class="container ms-4 mt-3">
+    <div style="height: 100px; width: 150px;" [ngStyle]="myChildColor">
+        <p class="text-center pt-4">ngOnChanges</p>
+    </div>
+</div>
+<ng-content></ng-content>
+<p>[CHILD] DoCheck -{{called}} times</p>
+</div>

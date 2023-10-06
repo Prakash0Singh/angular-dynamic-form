@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center">
+    <input type="number" placeholder="Please Enter Some Number" #inputnumber>
+    <button (click)="numAdd(inputnumber.value)">Add</button>
+</div>
+<ul>
+    <li *ngFor="let i of lisdata">{{i}}</li>
+</ul>

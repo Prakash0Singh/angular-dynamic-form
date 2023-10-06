@@ -1,0 +1,131 @@
+<!-- <mat-sidenav-container class="example-container" *ngIf="shouldRun">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <p>This is Sidebar Content</p>
+    <ul type="none">
+    <li><button mat-icon-button color="primary"><mat-icon>home</mat-icon></button></li>
+    <li><button mat-icon-button color="warn"><mat-icon>favorite</mat-icon></button></li>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-icon-button color="primary" (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button> -->
+
+<div class="container mb-5">
+  <section class="example-section">
+    <label class="example-margin">Color:</label>
+    <mat-radio-group [(ngModel)]="color">
+      <mat-radio-button class="example-margin" value="primary">
+        Primary
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="accent">
+        Accent
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="warn">
+        Warn
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+  <br>
+  <!-- Button trigger modal -->
+<button type="button" mat-raised-button color="primary" class="mb-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="displayForm()">New Data</button>
+    <h4>Api Data Calling</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of demoUserInfo">
+                <td>{{i.name}}</td>
+                <td matTooltip="{{i.name}} is {{i.age}} old" matTooltipPosition="above">{{i.age}}</td>
+                <td>{{i.number}}</td>
+                <td>
+                    <button mat-icon-button [color]="color" (click)="editdemouser(i)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary"(click)="deletedemouser(i)" >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <!-- <button mat-icon-button (click)="openSnackBar()">
+                      <mat-icon>content_copy</mat-icon>
+                    </button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">User Deatils</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="this.demouserdata.reset()"></button>
+        </div>
+        <div class="modal-body">
+            
+            <form [formGroup]="demouserdata">
+                <div class="row">
+                <div class=" col-12 mb-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                  <mat-label for="name" class="form-label">Name</mat-label>
+                  <input matInput type="text" #input maxlength="10"  class="form-control" id="name" formControlName="name">
+                  <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+                  <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('name')?.hasError('required')">
+                    *Required field</mat-error>
+                </mat-form-field>
+                </div>
+                <div class="col-4 mb-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                  <mat-label for="age" class="form-label">Age</mat-label>
+                  <input matInput type="text" class="form-control" id="age" formControlName="age">
+                  <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('age')?.hasError('required')">
+                    *Required field</mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('age')?.hasError('pattern')">
+                      *Please Enter Number Only</mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('age')?.hasError('maxlength')">
+                      *Maxmum 2 digits</mat-error>
+                </mat-form-field>
+                </div>
+                <div class="col-8 mb-3">
+                    <mat-form-field appearance="fill" class="w-100">
+                    <mat-label for="number" class="form-label">Number</mat-label>
+                    <span matPrefix> +91 &nbsp;</span>
+                    <input matInput type="text" class="form-control" id="number" formControlName="number">
+                    <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('number')?.hasError('required')">
+                      *Required field</mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('number')?.hasError('pattern')">
+                        *Please Enter Numbers Only</mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('number')?.hasError('minlength')">
+                        *Minimum 10 digits</mat-error>
+                    <mat-error class="text-danger ms-2" *ngIf="demouserdata.get('number')?.hasError('maxlength')">
+                        *Maxmum 10 digits</mat-error>
+                </mat-form-field>
+                  </div>
+                </div>
+                <button mat-raised-button color="primary" class="float-end" type="submit" *ngIf="toggleButton" data-bs-dismiss="modal" (click)="userNewData()" [disabled]="demouserdata.invalid">Submit</button> 
+                <button mat-raised-button color="accent" class="float-end" type="submit" *ngIf="!toggleButton" data-bs-dismiss="modal" (click)="updateData()" [disabled]="demouserdata.invalid">Update</button>
+              </form>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </mat-sidenav-content> -->
+<!-- </mat-sidenav-container> -->
+  <br>
+  <div class="container">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="demodate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <p>{{demodate}}</p>
+    <button mat-raised-button color="accent" (click)="data(demodate)">Click</button>
+  </div>

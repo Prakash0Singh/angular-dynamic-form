@@ -1,0 +1,86 @@
+<!-- Angular Compiler Convert * into ng-template -->
+<div class="ms-3 mt-5">
+    <p class="text-center text-success display-5 ">{{ welcMsg }}</p>
+    <p class="text-danger fw-bolder">1. Component Directive in Angular</p>
+    <button (click)="firstButton()">Click Here</button>
+    <p class="mt-1">{{ showMsg }}</p>
+    <div>
+        <p class="text-danger fw-bolder">2. Structural Directive in Angular</p>
+        <p class="mx-2 fw-bolder">(a) ngIf then and else </p>
+        <input class="mb-3" type="radio" name="radiobtn" id="show" (click)="checkingCon(true)" />
+        <label for="show">Show Paragraph</label> 
+        <input class="mb-3 ms-3" type="radio" name="radiobtn" id="hide" (click)="checkingCon(false)" />
+        <label for="hide">Hide Paragraph</label>
+        <div *ngIf="strVariable1; then rightpart; else wrongpart"></div>
+        <!-- <ng-template [ngIf]="strVariable1" [ngIfThen]="rightpart"; [ngIfElse]="wrongpart"> we can also do this-->
+            <ng-template #rightpart>
+                <p class="text-success fs-6 fw-bold">
+                    This will run on Show Paragraph
+                </p>
+            </ng-template>
+            <ng-template #wrongpart>
+                <p class="text-danger ds-6 fw-bold">
+                    This will run on Hide
+                </p>
+            </ng-template>
+        
+        <p class="mx-2 fw-bolder">(b) ngSwitch, *ngSwitchCase and *ngSwitchDefault</p>
+        <div [ngSwitch]="yourName">
+            <p *ngSwitchCase="'Ram'">Hello  Ram</p>
+            <p *ngSwitchCase="'Prakash'">Hello  Prakash Singh </p>
+            <p *ngSwitchDefault>No Data Match</p>
+        </div>
+        <p class="mx-2 fw-bolder">(c) ngFor</p>
+        <div>
+            <!-- <p *ngFor="let i of  objItems">{{i.name}} {{i.email}} {{i.city}}</p> -->
+            <!-- How angular convert * forloop :-  -->
+                <ng-template ngFor let-i let-n="index+1" [ngForOf]="objItems"> 
+                   <p>{{n}} | {{i.name}}</p>  
+                </ng-template>
+            
+        </div>
+        <p class="mx-2 fw-bolder">(d) checking condition on loop</p>
+        <p class="mx-2">  - ng-container vs ng-template</p>
+        <ng-container *ngFor="let i of tutionfee">
+            <ng-template [ngIf]="i.paid">
+                <p>{{i.name}}  | {{i.fee}}</p>  
+            </ng-template>
+        </ng-container>
+        <p class="text-danger fw-bolder">3. Attribute Directive in Angular</p>
+        <p>(a) *ngStyle</p>
+        <p [ngStyle]="{ 'color': 'brown','fontSize':'20px' }">This is Example of ngStyle</p>
+        <p>(b) *ngClass</p>
+        <p [ngClass]="'fw-bolder'"> This is Sample for ngClass</p>
+        <p [ngClass]="{'fs-1':true,'text-danger':false,'text-center':true}"> Some other Sample for ngClass</p>
+    </div>
+</div>
+<hr>
+<div class="m-5">
+    <div class="m-4">
+    <h3 class="text-center text-success">Examples of Directives</h3>
+    <br>
+    <label for="ranUser" class="me-3">Get Deatil About : </label>
+    <select (change)="showMeData($event)" name="random user" id="ranUser">
+        <option  *ngFor="let i of listItems" [value]="i.name" >{{i.name}}</option>
+    </select>
+    <br>
+        <span class="fw-bolder me-3">{{itemName}}</span>
+        <span class="text-muted">{{itemPostion}}</span>
+        <p class="ms-2">{{itemDetail}}</p>
+    </div>
+    <div class="m-4">
+        <label for="forCarList" class="me-2">Select Anything from list - </label>
+        <select name="Shapes" id="forCarList" (change)="showShape($event)">
+            <option *ngFor="let i of someList index as k" [value]="i.name">{{k+1}} {{i.name}}</option>
+        </select>
+         
+        <div class="m-3" *ngIf="howBox">
+            <!-- we can apply mutiple style like that we can store it on object call object directly -->
+            <!-- <i class="{{shapeClass}} me-3" [ngStyle]="{'font-size.px':fontSize,'color':ColorChange}"></i> -->
+            <i class="{{shapeClass}} me-3" [ngStyle]="myIconStyles"></i>
+            <button class="btn btn-sm btn-success me-2" (click)="increaseFont()">+</button>
+            <button class="btn btn-sm btn-danger me-3" (click)="decreaseFont()">-</button>
+            <button class="btn btn-sm btn-primary me-3" (click)="radomColorChange()">Color <i class="bi bi-shuffle "></i></button>
+        </div>
+    </div>
+</div>

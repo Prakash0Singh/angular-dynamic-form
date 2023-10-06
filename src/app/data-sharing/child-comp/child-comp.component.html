@@ -1,0 +1,11 @@
+        <div class="col-12 mx-auto card mt-5">
+                <div class="card-header">
+                    Children Component
+                </div>
+                <div class="card-body">
+                    <p>Gettting Data : {{parentData}}</p>
+                    <label for="sendData">Sending Data:</label>
+                    <input type="text" id="sendData" placeholder="Sending Data" class="ms-2" [(ngModel)]="userString">
+                    <button class=" ms-2 btn btn-sm btn-dark" (click)="sendingData()">Send Data</button>
+                </div>
+            </div>

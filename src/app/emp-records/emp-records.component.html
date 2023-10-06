@@ -1,0 +1,68 @@
+<div class="container mt-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink = "/home" routerLinkActive= "active">Home</a></li>
+        <li class="breadcrumb-item active">Employee Records</li>
+    </ol>
+</nav>
+    <h5 class="text-center">Here Are Our Employee Record's</h5>
+    <br>
+    <table class="table">
+        <thead>
+          <tr>
+              <th scope="col">Name</th>
+            <th scope="col">Emp-ID</th>
+            <th scope="col">Post</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of dataRecords">
+            <td (click)="empCard(i)">{{i.name}}</td>
+            <td>{{i.empID}}</td>
+            <td>{{i.post}}</td>
+            <td>{{i.department}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div *ngIf="showData !=''">
+  <div class="conatiner d-flex justify-content-center mx-5" >
+    <div class="card bg-dark text-light px-5 pb-5 text-center">
+        <p class="text-center fs-3 fw-bold pt-3 mb-3">Employee Card</p>
+        <p>{{showData.name}}</p>
+        <p>{{showData.empID}}</p>
+        <p>{{showData.post}}</p>
+        <p>{{showData.department}}</p>
+        <p>{{showData.bond}} </p>
+        <p>{{showData.joining}}</p>
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-dark btn-sm mt-2" routerLink="/emp-rec" (click)="clearRecord()">Clear</a>
+</div>
+</div>
+<div class="container mx-3">
+    <router-outlet></router-outlet>
+</div>
+<div class="container my-5">
+<h4 class="text-center">Employee Record List 2</h4>
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Name</th>
+      <th scope="col">Emp-ID</th>
+      <th scope="col">Post</th>
+      <th scope="col">Department</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of dataRecords">
+      <td (click)="empCard2(i)">{{i.name}}</td>
+      <td>{{i.empID}}</td>
+      <td>{{i.post}}</td>
+      <td>{{i.department}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

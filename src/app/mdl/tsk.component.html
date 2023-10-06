@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <p class="text-center fs-4"> Asphalt 9 </p>
+        </div>
+        <div class="col-12 mb-4">
+            <div class="d-flex justify-content-center">
+                <input type="text" placeholder="Enter userName" [(ngModel)]="userName">
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="carlist">Select Car which you Drive on Asphalt 9</label>
+            <select name="cars" id="carlist" (click)="carsSlt($event)">
+                <option value="Porsche 911 Targa">Porsche 911 Targa</option>
+                <option value="Dodge Challenger Hemi">Dodge Challenger Hemi</option>
+                <option value="Ford Shelby GT350R">Ford Shelby GT350R</option>
+                <option value="Ginetta G60">Ginetta G60</option>
+                <option value="Lotus Elise">Lotus Elise</option>
+                <option value="Porsche 718 Cayman">Porsche 718 Cayman</option>
+                <option value="Chevrolet Camaro GS">Chevrolet Camaro GS</option>
+                <option value="DS e-Tense">DS e-Tense</option>
+                <option value="BMW Z4 LCI E89">BMW Z4 LCI E89</option>
+                <option value="Mitsubishi Lancer Evolution">Mitsubishi Lancer Evolution</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <label for="roadmap">Select your racing track : </label><br>
+            <input type="radio" name="roadmap" (click)="track($event)" value="Reverse Circuit">Reverse Circuit <br>
+            <input type="radio" name="roadmap" (click)="track($event)" value="Out of Bounds">Out of Bounds <br>
+            <input type="radio" name="roadmap" (click)="track($event)" value="Industrial Run ">Industrial Run <br>
+            <input type="radio" name="roadmap" (click)="track($event)" value="Auckland Track ">Auckland Track 
+        </div>
+        <div class="col-4">
+            <label for="ability"> Select your ability</label>
+            <br>
+            <input type="checkbox" name="Extra Time" id="time" (click)="ability($event)">
+            <label for="time">Extra Time</label><br>
+            <input type="checkbox" name="Nitro" id="nitro" (click)="ability($event)">
+            <label for="nitro">Nitro</label><br>
+            <input type="checkbox" name="Double Damage" id="damage" (click)="ability($event)">
+            <label for="damage">Double Damage</label><br>
+            <button class=" mt-2 float-end me-5">Let's Go</button>
+        </div>
+        <div class="col-12 mb-4">
+            <div *ngIf="userName.length>6; then rightpart; else wrongpart"></div>
+            <ng-template #rightpart>
+                <p class="text-success fs-5 fw-bold text-center">
+                    {{userName}}
+                </p>
+            </ng-template>
+            <ng-template #wrongpart>
+                <p class="text-danger ds-5 fw-bold text-center">
+                   userName must have min. 7 letters
+                </p>
+            </ng-template>
+        </div>
+        <div class="col-4 ">
+            <p class="fs-5">{{selectCar}}</p>
+        </div> 
+        <div class="col-4 ">
+            <p class="fs-5">{{selectTrack}}</p>
+        </div> 
+        <div class="col-4 ">
+            <span class="fs-5 fw-bolder">{{a}} </span>
+            <span class="fs-5 fw-bolder">{{b}} </span>
+            <span class="fs-5 fw-bolder">{{c}} </span>
+        </div> 
+    </div>
+</div>

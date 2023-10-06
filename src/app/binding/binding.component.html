@@ -1,0 +1,92 @@
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12"><p class="text-center text-primary display-5 ">Types of Data Binding</p></div>
+        <div class="col-3">
+            <p class="text-center">String Interpolation</p>
+            <p class="fs-6">{{variable1}}</p>
+            <img src={{link}} alt="..." height="150px" width="150px">
+        </div>
+        <div class="col-3">
+            <p class="text-center">Propety Binding</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-sm btn-warning" [disabled]="variable2">Property Binding</button>
+            </div>
+        </div>
+        <div class="col-3">
+            <p class="text-center">Event Binding</p>
+            <div class="d-flex justify-content-center">
+            <button class="btn btn-sm btn-info" (click)="callAlert('Prakash Singh')">Calling Event</button>
+            </div>
+        </div>
+        <div class="col-3">
+            <p class="text-center">Two-Way Binding</p>
+            <div class="d-flex justify-content-center flex-column">
+                <input type="text" [(ngModel)]="userName">
+                <p>{{userName}}</p>
+            </div>
+        </div>
+        <div class="col-3 mt-4">
+            <label for="options" class="me-2">Select Any Option</label>
+            <select id="options" (change)="selectValue($event)">
+                <option value="None">None</option>
+                <option value="Car">Car</option>
+                <option value="Bike">Bike</option>
+                <option value="Ship">Ship</option>
+                <option value="Bus">Bus</option>
+            </select>
+            <p>Your Selected Value is :- {{selectedValue}}</p>
+        </div>
+        <div class="col-3 mt-4" id="colorHere">
+            <button (click)="randomColor($event)">Random Color </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="text-center">Calculator</h5>
+            <label for="firstVal " class="me-2">Enter first Value</label>
+            <input type="number" id="firstVal" placeholder="First Value" name="first" class="me-4" (keyup)="selectNumber($event)">
+            <label for="secondVal"class="me-2">Enter Second Value</label>
+            <input type="number" id="secondVal" placeholder="Second Value" name="second" class="me-4" (keyup)="selectNumber($event)">
+            <span class="mx-3">{{resultTotal}}</span>
+            <label for="operation" class="me-2">Select Operation</label>
+            <select id="operation" (change)="selectOperation($event)">
+                <option value="none">None</option>
+                <option value="+">Add</option>
+                <option value="-">Minus</option>
+                <option value="*">Multiple</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h5 class="text-center">Image Opacity</h5>
+            <div class="d-flex justify-content-center">
+                <img src="https://images.unsplash.com/photo-1552353617-3bfd679b3bdd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="boat image" (click)="imageOpacity($event)">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row mt-3">
+        <div class="col-12">
+            <h5 class="text-center">Unsplash Image Search</h5>
+            <div class="inputBox ms-2">
+                <label for="unsplash" class="me-3">Search Image on Unsplash</label>
+                <input type="text" id="unsplash" placeholder="Enter anything here" (keyup)="enterdValue($event)">
+                <br>
+            <div class="my-3 " id="randomImageBox">
+                <img [src]="topicName" alt="random" >
+            </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row my-4">
+        <div class="col-12">
+            <label for="font-family" class="me-3">Font Family :</label>
+            <input type="text" (keyup)="fFamily($event)" placeholder="Enter Font Family here" name="chaneFontStyle" id="font-family">
+            <p>{{showData}}</p>
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col-12">
+   {{v}}        </div>
+    </div>
+</div>

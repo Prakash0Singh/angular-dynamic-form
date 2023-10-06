@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 mx-auto">
+          <mat-card>
+            <mat-card-content>
+            <p class="text-center fs-3 m-3">Login Form</p>
+            <form [formGroup]="loginFom">
+              <!-- <div> -->
+                  <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Email address</mat-label>
+                  <input type="email" matInput class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
+                  <!-- <input matInput> -->
+                  </mat-form-field>
+                  <!-- <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                <!-- </div> -->
+                <mat-form-field appearance="fill" class="w-100">
+                  <mat-label>Password</mat-label>
+                <input type="password" matInput class="form-control" id="exampleInputPassword1" formControlName="pass">
+                <!-- <input matInput> -->
+                </mat-form-field>
+                <!-- <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" formControlName="pass">
+                </div> -->
+                <button type="submit" mat-raised-button color="primary" class=" float-end my-3" (click)="loginData()">Login</button>
+              </form>
+              </mat-card-content>
+            </mat-card>
+            </div>
+          <div class="col-12">
+            <app-dynamic-form [formControls]="JSONForm" ></app-dynamic-form>
+          </div>
+    </div>
+</div>
